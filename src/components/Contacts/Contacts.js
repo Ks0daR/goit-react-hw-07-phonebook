@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ContactListItem from './ContactListItem';
-import {
-  changeFilter,
-  removeContact,
-} from '../../redux/phoneBook/phoneBookActions';
+import { changeFilter } from '../../redux/phoneBook/phoneBookActions';
+import { removeContact } from '../../redux/phoneBook/phoneBookOperations';
 import PropTypes from 'prop-types';
 import styles from './Contacts.module.css';
 

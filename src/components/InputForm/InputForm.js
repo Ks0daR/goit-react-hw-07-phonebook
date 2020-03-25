@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addContact } from '../../redux/phoneBook/phoneBookActions';
+import { addContact } from '../../redux/phoneBook/phoneBookOperations';
 import PropTypes from 'prop-types';
 
 import styles from './InputForm.module.css';
@@ -77,8 +77,8 @@ const mapStateToProps = state => ({
   theme: state.theme,
   contacts: state.contacts.contactsBase,
 });
-const mapDispatchToProps = dispatch => ({
-  getInfo: ({ name, number }) => dispatch(addContact(name, number)),
-});
+const mapDispatchToProps = {
+  getInfo: addContact,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputForm);
