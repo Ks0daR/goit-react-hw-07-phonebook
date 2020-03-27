@@ -1,6 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ContactListItem from './ContactListItem';
+import { connect } from 'react-redux';
+import { getTheme } from '../../redux/theme/themeSelectors';
+import { getVisibleContacts } from '../../redux/phoneBook/phoneBookSelectors';
 import { changeFilter } from '../../redux/phoneBook/phoneBookActions';
 import { removeContact } from '../../redux/phoneBook/phoneBookOperations';
 import PropTypes from 'prop-types';
@@ -32,17 +34,10 @@ Contacts.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapStateToProps = state => {
-  const { contactsBase, filter } = state.contacts;
-  console.log(contactsBase);
-  const visibleContacts = contactsBase.filter(element =>
-    element.name.toLowerCase().includes(filter.toLowerCase()),
-  );
-  return {
-    theme: state.theme,
-    elements: visibleContacts,
-  };
-};
+const mapStateToProps = state => ({
+  theme: getTheme(state),
+  elements: getVisibleContacts(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   onRemove: (id, count) => {

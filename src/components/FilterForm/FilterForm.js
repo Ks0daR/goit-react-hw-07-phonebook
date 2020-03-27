@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+  getContacts,
+  getFilter,
+} from '../../redux/phoneBook/phoneBookSelectors';
 import { changeFilter } from '../../redux/phoneBook/phoneBookActions';
 import styles from './FilterForm.module.css';
 
@@ -26,8 +30,8 @@ FilterForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  filterValue: state.contacts.filter,
-  contacts: state.contacts.contactsBase,
+  filterValue: getFilter(state),
+  contacts: getContacts(state),
 });
 
 const mapDispatchToProps = {

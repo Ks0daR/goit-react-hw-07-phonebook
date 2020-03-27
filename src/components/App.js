@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Layout from './Layout';
 import Loader from './Loader';
 import { connect } from 'react-redux';
+import { getLoader, getError } from '../redux/phoneBook/phoneBookSelectors';
 import { fetchContacts } from '../redux/phoneBook/phoneBookOperations';
 import PhoneBookPage from '../pages/PhoneBookPage';
 
@@ -10,9 +11,10 @@ class App extends Component {
     this.props.getContacts();
   }
   render() {
+    const errorMessage = Object.keys(this.props.error).length;
     return (
       <Layout>
-        {this.props.error && <h1>Ooops... Something went wrong</h1>}
+        {errorMessage && <h1>Ooops... Something went wrong</h1>}
         {this.props.loader && <Loader />}
         <PhoneBookPage />
       </Layout>
@@ -21,8 +23,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  loader: state.contacts.loader,
-  error: state.contacts.error,
+  loader: getLoader(state),
+  error: getError(state),
 });
 
 const mapDispatchToProps = {

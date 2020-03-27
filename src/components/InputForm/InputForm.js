@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getTheme } from '../../redux/theme/themeSelectors';
+import { getContacts } from '../../redux/phoneBook/phoneBookSelectors';
 import { addContact } from '../../redux/phoneBook/phoneBookOperations';
 import PropTypes from 'prop-types';
 
@@ -74,8 +76,8 @@ class InputForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  theme: state.theme,
-  contacts: state.contacts.contactsBase,
+  theme: getTheme(state),
+  contacts: getContacts(state),
 });
 const mapDispatchToProps = {
   getInfo: addContact,
